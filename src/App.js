@@ -8,8 +8,8 @@ import Todo from './components/Todo';
 
 function App() {
   return (
-    <div className="container is-fluid">
-      <Todo />
+    <div className ="container is-fluid">
+    <Todo/>
     </div>
   );
 }
