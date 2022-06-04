@@ -31,7 +31,7 @@ function Todo() {
     text: "",
     done: false,
   });
-  // const [filterItems, setFilterItems] = useState(items);
+  const [filterItems, setFilterItems] = useState(items);
 const handleChangeDone = (key) => {
     putItems(
       items.map((item) => {
@@ -43,11 +43,23 @@ const handleChangeDone = (key) => {
       })
     );
   };
+   const handleSelectAll = () => {
+    putItems(filterItems);
+     console.log('Select All')
+  };
+   const handleSelectDoneOnly = () => {
+    putItems(filterItems.filter((filterItem) => filterItem.done === true));
+  };
+
+  const handleSelectNotDoneOnly = () => {
+    putItems(filterItems.filter((filterItem) => filterItem.done === false));
+  };
     const handleNewItemNameChange = (event) => {
     setNewItem({ ...newItem, text: event.target.value });
   };
     const handleAddNewItem = () => {
     putItems([...items, newItem]);
+      setFilterItems([...items, newItem]);
     setNewItem({
       key: getKey(),
       text: "",
@@ -71,6 +83,23 @@ const handleChangeDone = (key) => {
         </div>
             <button onClick={handleAddNewItem} class="button">
           Add
+        </button>
+      </div>
+            <div
+        style={{
+          display: "flex",
+          paddingBottom: "20px",
+          justifyContent: "center",
+        }}
+      >
+        <button className="button" onClick={handleSelectAll}>
+          すべて
+        </button>
+        <button className="button" onClick={handleSelectNotDoneOnly}>
+          未完了
+        </button>
+        <button className="button" onClick={handleSelectDoneOnly}>
+          完了済み
         </button>
       </div>
       {items.map(item => (
