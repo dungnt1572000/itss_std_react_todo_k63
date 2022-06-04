@@ -114,6 +114,11 @@ const handleChangeDone = (key) => {
       <div className="panel-block">
         {items.length} items
       </div>
+       <div className="panel-block">
+        <button className="button is-light is-fullwidth" onClick={clearItems}>
+          全てのToDoを削除
+        </button>
+      </div>
     </div>
   );
 }
