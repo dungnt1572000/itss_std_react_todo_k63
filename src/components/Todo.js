@@ -43,17 +43,35 @@ const handleChangeDone = (key) => {
       })
     );
   };
-  //  const handleSelectDoneOnly = () => {
-  //   putItems(filterItems.filter((filterItem) => filterItem.done === true));
-  // };
-
-  // const handleSelectNotDoneOnly = () => {
-  //   putItems(filterItems.filter((filterItem) => filterItem.done === false));
-  // };
+    const handleNewItemNameChange = (event) => {
+    setNewItem({ ...newItem, text: event.target.value });
+  };
+    const handleAddNewItem = () => {
+    putItems([...items, newItem]);
+    setNewItem({
+      key: getKey(),
+      text: "",
+      done: false,
+    });
+  };
   return (
     <div className="panel">
       <div className="panel-heading">
         ITSS ToDoアプリ
+      </div>
+        <div style={{ display: "flex", paddingBottom: "20px" }}>
+        <div style={{ marginRight: "10px", width: "100%" }}>
+          <input
+            type="text"
+            onChange={handleNewItemNameChange}
+            className="input"
+            value={newItem.text}
+            placeholder="Add new item"
+          />
+        </div>
+            <button onClick={handleAddNewItem} class="button">
+          Add
+        </button>
       </div>
       {items.map(item => (
           <TodoItem
