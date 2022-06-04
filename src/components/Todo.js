@@ -26,7 +26,30 @@ function Todo() {
     { key: getKey(), text: '明日の準備をする', done: false },
     /* テストコード 終了 */
   ]);
+  const [newItem, setNewItem] = React.useState({
+    key: getKey(),
+    text: "",
+    done: false,
+  });
+  // const [filterItems, setFilterItems] = useState(items);
+const handleChangeDone = (key) => {
+    putItems(
+      items.map((item) => {
+        if (item.key === key) {
+          item.done = !item.done;
+        }
 
+        return item;
+      })
+    );
+  };
+  //  const handleSelectDoneOnly = () => {
+  //   putItems(filterItems.filter((filterItem) => filterItem.done === true));
+  // };
+
+  // const handleSelectNotDoneOnly = () => {
+  //   putItems(filterItems.filter((filterItem) => filterItem.done === false));
+  // };
   return (
     <div className="panel">
       <div className="panel-heading">
@@ -35,9 +58,12 @@ function Todo() {
       {items.map(item => (
           <TodoItem
         key={item.key}
-        item={item}
+        text = {item.text}
+            done = {item.done}
+            handleChangeDone={()=>handleChangeDone(item.key)}
         />
-      ))}
+      )
+                )}
       <div className="panel-block">
         {items.length} items
       </div>
